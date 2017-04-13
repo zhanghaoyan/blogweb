@@ -1,0 +1,64 @@
+{% extends "model.html" %}
+{% block title %}
+    首页
+{% endblock %}
+{% block css %}
+    <style>
+        .actions li {
+            border: solid 1px darkgrey;
+            border-radius: 5px;
+
+        }
+        .actions li:hover {
+            border: solid 1px #2ebaae;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+            <!-- Post -->
+            {% for line in data %}
+                <article class="post">
+                    <header>
+                        <div class="title">
+                            <h2><a href="/detail/{{ line.aid }}/">{{ line.title }}</a></h2>
+                            <p>{{ line.title }}</p>
+                        </div>
+                        <div class="meta">
+                            <time class="published" datetime="2015-11-01">{{ line.time }}</time>
+                            <a href="#" class="author">
+                                <span class="name">手艺人</span>
+                                <img src="/static/images/avatar.jpg" alt=""/>
+                            </a>
+                        </div>
+                    </header>
+                    <!--
+                    <a href="#" class="image featured">
+                        <img src="/static/images/pic01.jpg" alt=""/>
+                    </a>
+                    -->
+                    <p>{{ line.content|slice:"200"|safe }}</p>
+                    <footer>
+                        <ul class="actions">
+                            <li><a href="/detail/{{ line.aid }}/" class="button big">阅读全文</a></li>
+                        </ul>
+                        <ul class="stats">
+                            <li><a href="#" class="icon fa-heart">28</a></li>
+                            <li><a href="#" class="icon fa-comment">128</a></li>
+                        </ul>
+                    </footer>
+                </article>
+            {% endfor %}
+            <ul class="actions pagination">
+{#                <li><a href="" class="disabled button big previous">上一页</a></li>#}
+                {{ page_str }}
+{#                <li><a href="#" class="button big next">下一页</a></li>#}
+            </ul>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $("a[class='button big next']").click(function () {
+            $(this)
+        })
+    </script>
+{% endblock %}

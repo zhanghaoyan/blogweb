@@ -1,0 +1,62 @@
+.label-self,.control-label {
+    height: 30px;
+    line-height: 30px;
+}
+
+.form-horizontal .control-label {
+    padding-top: 0;
+    text-align: center;
+    width: 100px;
+}
+
+.form-horizontal .controls{
+    margin-left: 0;
+}
+
+.form-horizontal .control-group {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+input {
+    width: 99%;
+}
+
+label {
+    display: inline-block;
+    margin-bottom:0;
+}
+
+.control-label {
+    margin-top: 0;
+}
+
+.content-self {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.label-self {
+    margin: 6px 0 6px 5px;
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+    color: #4B4A50;
+}
+
+.category label {
+    margin-left: 20px;
+}
+
+.category {
+    margin-bottom: 20px;
+}
+
+.save-self {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.save-self button {
+    border-radius: 10px;
+    margin: 0 0 30px 20px;
+}

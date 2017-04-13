@@ -1,0 +1,17 @@
+ul.actions li.page {
+    padding: 0;
+    margin: 0 3px 0 3px;
+}
+
+.page a{
+    display: inline-block;
+    width: 40px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    text-decoration: none;
+}
+
+.active {
+    background: #2ebaae;
+}

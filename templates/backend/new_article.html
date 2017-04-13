@@ -1,0 +1,67 @@
+{% extends "backend/newmodel.html" %}
+
+{% block title %}添加新文章{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/assets/css/backmodel.css">
+{% endblock %}
+
+{% block jshead %}
+    <script src="/static/ckeditor/ckeditor.js"></script>
+    <script src="/static/ckeditor/config.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="content-self">
+        <form action="/backend/new_article/" class="form-horizontal" method="POST">
+            {% csrf_token %}
+            <div class="control-group">
+                <div>
+                    <label class="label-self" for="title">文章标题</label><span>{{ obj.title.errors.0 }}</span>
+                </div>
+                <div class="controls">
+{#                    <input type="text" id="title" name="title" class="input-self">#}
+                    {{ obj.title }}
+                </div>
+            </div>
+            <div>
+                <label class="label-self" for="edit">文章内容</label>
+            </div>
+{#            <textarea name="edit" id="edit"></textarea>#}
+            {{ obj.content }}
+            <div>
+                <label class="label-self" for="edit">文章分类</label>
+            </div>
+            <div class="category">
+                {% for opt in obj.category_id %}
+                    {{ opt }}
+                {% endfor %}
+            </div>
+            <div class="save-self">
+                <button type="submit" class="btn btn-primary btn-lg" name="save-draft" onclick="save_draft()">保存草稿</button>
+                <button type="submit" class="btn btn-primary btn-lg">发布文章</button>
+                <button type="button" class="btn btn-primary btn-lg" name="cancel" onclick="cancel_submit()">取 消</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            CKEDITOR.replace('content',{
+                "filebrowserUploadUrl" : "/backend/upload/",
+                extraPlugins: 'codesnippet',
+                codeSnippet_theme: 'dark'
+            });
+        });
+        function cancel_submit() {
+            window.location.href = "/backend/index/"
+        }
+        function save_draft() {
+{#            var title = $('#title').val();#}
+{#            var content = $('.cke_editable').val();#}
+            $('.form-horizontal').attr("action","/backend/save_draft/");
+        }
+    </script>
+{% endblock %}

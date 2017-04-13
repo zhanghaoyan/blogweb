@@ -1,0 +1,25 @@
+{% extends "model.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/highlight/styles/atom-one-dark.css">
+{% endblock %}
+
+{% block title %}
+阅读全文
+{% endblock %}
+
+{% block content %}
+    <div>
+    <h1>{{ data.0.1 }}</h1>
+    </div>
+    <div>
+        {{ data.0.2|safe }}
+    </div>
+{% endblock %}
+
+{% block js %}
+<script src="/static/highlight/highlight.pack.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+{% endblock %}

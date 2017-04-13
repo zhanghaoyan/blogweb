@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--[if lte IE 8]><script src="/static/assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/static/assets/css/main.css"/>
+    <link rel="stylesheet" href="/static/assets/css/page.css">
+    <!--[if lte IE 9]><link rel="stylesheet" href="/static/assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="/static/assets/css/ie8.css" /><![endif]-->
+    {% block css %}
+
+    {% endblock %}
+</head>
+<body>
+<div id="wrapper">
+    <header id="header">
+        <h1><a href="#">技术渣</a></h1>
+        <nav class="links">
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/category/?page=linux">Linux</a></li>
+                <li><a href="/category/?page=python">Python</a></li>
+                <li><a href="/category/?page=chat">废点话</a></li>
+                <li><a href="/category/?page=other">瞎玩儿</a></li>
+            </ul>
+        </nav>
+        <nav class="main">
+            <ul>
+                <li class="search">
+                    <a class="fa-search" href="#search">Search</a>
+                    <form id="search" method="get" action="#">
+                        <input type="text" name="query" placeholder="Search"/>
+                    </form>
+                </li>
+                <li class="menu">
+                    <a class="fa-bars" href="#menu">菜单</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Menu -->
+    <section id="menu">
+        <!-- Search -->
+        <section>
+            <form class="search" method="get" action="#">
+                <input type="text" name="query" placeholder="搜索"/>
+            </form>
+        </section>
+        <!-- Links -->
+        <section>
+            <ul class="links">
+                {{ userdata|safe }}
+            </ul>
+        </section>
+        <!-- Actions -->
+        <section>
+            <ul class="actions vertical">
+                <li><a href="{{ url }}" class="button big fit">{{ urltext }}</a></li>
+            </ul>
+        </section>
+    </section>
+    <div id="main">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <!-- Intro -->
+        <section id="intro">
+            <a href="#" class="logo"><img src="/static/images/logo.jpg" alt=""/></a>
+            <header>
+                <h2>技术渣</h2>
+                <p>捡拾那些掉在犄角旮旯的<a href="#">技术渣</a></p>
+            </header>
+        </section>
+        <!-- Mini Posts -->
+        <section>
+            <div class="mini-posts">
+                <!-- Mini Post -->
+                <article class="mini-post">
+                    <header>
+                        <h3><a href="/category/?page=linux">Linux</a></h3>
+                        <time class="published" datetime="2015-10-20">October 20, 2015</time>
+                        <a href="#" class="author"><img src="/static/images/avatar.jpg" alt=""/></a>
+                    </header>
+                    <a href="/category/?page=linux" class="image"><img src="/static/images/linux.jpg" alt="Linux"/></a>
+                </article>
+                <!-- Mini Post -->
+                <article class="mini-post">
+                    <header>
+                        <h3><a href="/category/?page=python">Python</a></h3>
+                        <time class="published" datetime="2015-10-19">October 19, 2015</time>
+                        <a href="#" class="author"><img src="/static/images/avatar.jpg" alt=""/></a>
+                    </header>
+                    <a href="/category/?page=python" class="image"><img src="/static/images/python.jpg" alt="Python"/></a>
+                </article>
+                <!-- Mini Post -->
+                <article class="mini-post">
+                    <header>
+                        <h3><a href="/category/?page=chat">废点话</a></h3>
+                        <time class="published" datetime="2015-10-18">October 18, 2015</time>
+                        <a href="#" class="author"><img src="/static/images/avatar.jpg" alt=""/></a>
+                    </header>
+                    <a href="/category/?page=chat" class="image"><img src="/static/images/pic06.jpg" alt="废点话"/></a>
+                </article>
+                <!-- Mini Post -->
+                <article class="mini-post">
+                    <header>
+                        <h3><a href="/category/?page=other">瞎玩儿</a></h3>
+                        <time class="published" datetime="2015-10-17">October 17, 2015</time>
+                        <a href="#" class="author"><img src="/static/images/avatar.jpg" alt=""/></a>
+                    </header>
+                    <a href="/category/?page=other" class="image"><img src="/static/images/pic07.jpg" alt="瞎玩儿"/></a>
+                </article>
+            </div>
+        </section>
+        <!-- About -->
+        <section class="blurb">
+            <h2>关于</h2>
+            <p>当你的能力撑不起你的野心，那你就应该滚去奋斗！</p>
+            <ul class="actions">
+                <li><a href="#" class="button">更多</a></li>
+            </ul>
+        </section>
+        <!-- Footer -->
+        <section id="footer">
+            {#                <ul class="icons">#}
+            {#                    <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>#}
+            {#                    <li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>#}
+            {#                    <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>#}
+            {#                    <li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>#}
+            {#                    <li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>#}
+            {#                </ul>#}
+{#            <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. /static/images:#}
+{#                <a href="http://unsplash.com">Unsplash</a>.</p>#}
+        </section>
+
+    </section>
+</div>
+<!-- Scripts -->
+<script src="/static/assets/js/jquery.min.js"></script>
+<script src="/static/assets/js/skel.min.js"></script>
+<script src="/static/assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="/static/assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="/static/assets/js/main.js"></script>
+{% block js %}
+
+{% endblock %}
+</body>
+</html>

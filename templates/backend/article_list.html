@@ -1,0 +1,122 @@
+{% extends "backend/newmodel.html" %}
+{% block title %}文章列表{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="/static/assets/css/backmodel.css">
+    <style>
+        .aid {
+            width: 5%;
+        }
+
+        .td-self {
+            width: 200px;
+        }
+
+        .aid,.td-self,.td-self-btn {
+            text-align: center;
+        }
+
+        .td-self-btn {
+            width: 250px;
+        }
+    </style>
+{% endblock %}
+{% block jshead %}
+    <script src="/static/ckeditor/ckeditor.js"></script>
+    <script src="/static/ckeditor/config.js"></script>
+{% endblock %}
+{% block content %}
+    <div id="page-content-self" style="width: 80%;min-width: 900px;margin: 0 auto;">
+        <table class="table table-hover">
+            <thead>
+                所有文章
+            </thead>
+            <tbody>
+                <th class="aid">文章ID</th>
+                <th class="td-self">文章标题</th>
+                <th class="td-self">所属分类</th>
+                <th class="td-self">发表时间</th>
+                <th class="td-self">操作</th>
+                {% for line in data %}
+                    <tr>
+                        <td class="aid">{{ line.aid }}</td>
+                        <td class="td-self"><a href="/detail/{{ line.aid }}/">{{ line.title }}</a></td>
+                        <td class="td-self">{{ line.category__cname }}</td>
+                        <td class="td-self">{{ line.time }}</td>
+                        <td class="td-self-btn">
+                            <button class="btn btn-success" name="edit">编辑</button>
+                            <button class="btn btn-warning" name="recycle">放入回收站</button>
+                            <button class="btn btn-danger" name="delete">删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block js %}
+{#    <script src="/static/js/jquery-1.10.2.js"></script>#}
+    <script>
+    function getaid(obj) {
+        var aid = $(obj).parent().siblings(".aid").text();
+        return aid;
+    }
+
+    $("[name=edit]").click(function () {
+        var edit_article = getaid(this);
+        var opt_dict = {"type_id":1,"aid":edit_article};
+        $.ajax({
+            url:"/backend/edit/",
+            type:"POST",
+            data:opt_dict,
+            datetype:"html",
+            success: function (data) {
+                $('#page-wrapper').html(data);
+                $('.form-horizontal').prepend("<input type='text' name='edit_aid' hidden='true' value="+edit_article+">")
+            }
+        })
+    });
+
+    $("[name=recycle]").click(function () {
+        var edit_article = getaid(this);
+        var opt_dict = {"type_id":2,"aid":edit_article};
+        var button = this;
+        $.ajax({
+            url:"/backend/delete/",
+            type:"POST",
+            data:opt_dict,
+            datetype:"text",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                if (obj["status"] == "OK") {
+                    alert("文章移入回收站，您可以到回收站中查看！");
+                    $(button).parent().parent().remove();
+                }else {
+                    alert("移入回收站失败！");
+                }
+            }
+        })
+    });
+
+    $("[name=delete]").click(function () {
+        var edit_article = getaid(this);
+        var opt_dict = {"type_id":3,"aid":edit_article};
+        var button = this;
+        $.ajax({
+            url:"/backend/delete/",
+            type:"POST",
+            data:opt_dict,
+            datetype:"text",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                if (obj["status"] == "OK") {
+                    alert("文章删除成功！");
+                    $(button).parent().parent().remove();
+                }else {
+                    alert("删除文章失败");
+                }
+            }
+        })
+    })
+    </script>
+{% endblock %}

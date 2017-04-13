@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--><html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="/static/media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="/static/media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/static/media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/daterangepicker.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="/static/media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <!-- END PAGE LEVEL STYLES -->
+    <link rel="shortcut icon" href="/static/media/image/favicon.ico"/>
+    {% block css %}{% endblock %}
+    {% block jshead %}{% endblock %}
+</head>
+<body class="page-header-fixed">
+<div class="header navbar navbar-inverse navbar-fixed-top">
+    <!-- BEGIN TOP NAVIGATION BAR -->
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <!-- BEGIN LOGO -->
+            <a class="brand" href="/">
+                <span style="margin-left: 50px;">技术渣</span>
+            </a>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                <img src="/static/media/image/menu-toggler.png" alt=""/>
+            </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <ul class="nav pull-right">
+                <!-- BEGIN NOTIFICATION DROPDOWN -->
+                <li class="dropdown" id="header_notification_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-warning-sign"></i>
+                        <span class="badge"></span>
+                    </a>
+                    <ul class="dropdown-menu extended notification">
+                        <li>
+                            <p>没有新的未读消息</p>
+                        </li>
+                        <li class="external">
+                            <a href="#">查看历史消息<i class="m-icon-swapright"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <li class="dropdown user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img alt="" src="/static/media/image/avatar1_small.jpg"/>
+                        <span class="username">技术渣渣</span>
+                        <i class="icon-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="icon-user"></i>我的账户</a></li>
+                        <li><a href="#"><i class="icon-tasks"></i>任务</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-lock"></i>锁屏</a></li>
+                        <li><a href="#"><i class="icon-key"></i>注销</a></li>
+                    </ul>
+                </li>
+                <!-- END USER LOGIN DROPDOWN -->
+            </ul>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END TOP NAVIGATION BAR -->
+</div>
+<div class="page-container">
+    <!-- 左边栏 -->
+    <div class="page-sidebar nav-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <ul class="page-sidebar-menu">
+            <li class="start active ">
+                <a href="/backend/index/">
+                    <i class="icon-home"></i>
+                    <span class="title">仪表盘</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-cogs"></i>
+                    <span class="title">文章管理</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="/backend/article_list/">文章列表</a>
+                    </li>
+                    <li>
+                        <a href="/backend/new_article/">新文章</a>
+                    </li>
+                    <li>
+                        <a href="/backend/draft/">草稿箱</a>
+                    </li>
+                    <li>
+                        <a href="/backend/recycle/">回收站</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="icon-bookmark-empty"></i>
+                    <span class="title">用户管理</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="user_list.html">用户列表</a>
+                    </li>
+                    <li>
+                        <a href="add_user.html">新建用户</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="last ">
+                <a href="recycle.html">
+                    <i class="icon-bar-chart"></i>
+                    <span class="title">回收站</span>
+                </a>
+            </li>
+            <li>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler hidden-phone"></div>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <li>
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <form class="sidebar-search"></form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- 左边栏结束 -->
+    <div class="page-content">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-inner">
+        2013 &copy; Metronic by keenthemes.Collect from <a href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a>
+        - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
+    </div>
+    <div class="footer-tools">
+			<span class="go-top">
+			<i class="icon-angle-up"></i>
+			</span>
+    </div>
+</div>
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<script src="/static/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="/static/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+<script src="/static/media/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+	<script src="media/js/excanvas.min.js"></script>
+	<script src="media/js/respond.min.js"></script>
+	<![endif]-->
+<script src="/static/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.uniform.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/static/media/js/jquery.vmap.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.vmap.russia.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.vmap.world.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.vmap.europe.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.vmap.germany.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.vmap.usa.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.vmap.sampledata.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.flot.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.flot.resize.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.pulsate.min.js" type="text/javascript"></script>
+<script src="/static/media/js/date.js" type="text/javascript"></script>
+<script src="/static/media/js/daterangepicker.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.gritter.js" type="text/javascript"></script>
+<script src="/static/media/js/fullcalendar.min.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
+<script src="/static/media/js/jquery.sparkline.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/static/media/js/app.js" type="text/javascript"></script>
+<script src="/static/media/js/index.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+    jQuery(document).ready(function () {
+        App.init(); // initlayout and core plugins
+        Index.init();
+        Index.initJQVMAP(); // init index page's custom scripts
+        Index.initCalendar(); // init index page's custom scripts
+        Index.initCharts(); // init index page's custom scripts
+        Index.initChat();
+        Index.initMiniCharts();
+        Index.initDashboardDaterange();
+        Index.initIntro();
+    });
+</script>
+{% block js %}{% endblock %}
+</body>
+</html>
