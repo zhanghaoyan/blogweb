@@ -23,9 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5l$)8@ft#$s20ziw^tp^!(17%7vt96+fxu=m+o5#blw+^u!85j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "10.130.53.126",
+    "www.zhanghaoyan.space",
+    "139.59.249.94",
+]
 
 
 # Application definition
@@ -85,8 +89,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'myblog',
         'USER': 'root',
-        'PASSWORD': 'zhydb',
-        'HOST': 'localhost',
+        'PASSWORD': '2Gkqx8EaqOqz4c',
+        'HOST': '10.130.53.126',
         'PORT': '3306',
         'charset': 'utf8',
     }
