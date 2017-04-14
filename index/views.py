@@ -46,10 +46,8 @@ def page(request,date_list,per_p_count=5,dis_page_num=5):
     # 页面上要显示的翻页按钮的数量，最好写成奇数，页面生成的页码才对称
     if data_len/per_page_count >= dis_page_num:
         display_page_num = dis_page_num
-        print("display_page_num：",display_page_num)
     else:
         display_page_num = math.ceil(data_len/per_page_count)
-        print("display_page_num：", display_page_num)
     # 如果当前请求的页面小于等于页面显示页码数的中位数，那么页码起始位置为1，结束位置为显示页码数加一
     if current_page <= math.ceil((display_page_num + 1)/2):
         page_start = 1
@@ -173,7 +171,6 @@ def index(request):
     res_dic = page(request,res)
     page_str = res_dic["page"]
     page_data = res_dic["li"]
-    print(page_str)
     return render(request,"index.html",{"data":page_data,"url":url,"urltext":urltext,"userdata":userdata,"page_str":page_str})
 
 def category(request):
