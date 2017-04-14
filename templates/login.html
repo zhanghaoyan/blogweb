@@ -30,6 +30,7 @@
     </section>
     <div class="login">
         <form action="/login/" method="post">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="username" class="label-tag">用户名：</label>
                 {{ obj.username }}
