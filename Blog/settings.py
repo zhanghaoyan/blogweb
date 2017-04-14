@@ -26,9 +26,7 @@ SECRET_KEY = '5l$)8@ft#$s20ziw^tp^!(17%7vt96+fxu=m+o5#blw+^u!85j'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "10.130.53.126",
-    "www.zhanghaoyan.space",
-    "139.59.249.94",
+    "*",
 ]
 
 
