@@ -62,6 +62,12 @@
         return aid;
     }
 
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            xhr.setRequestHeader('X-CSRFtoken',$.cookie("csrftoken"));
+        }
+    });
+
     $("[name=edit]").click(function () {
         var edit_article = getaid(this);
         var opt_dict = {"type_id":1,"aid":edit_article};
