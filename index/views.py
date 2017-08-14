@@ -23,7 +23,7 @@ def calculate_hash(hashstr,salt):
     res = hash.hexdigest()
     return res
 
-def page(request,date_list,per_p_count=5,dis_page_num=5):
+def pageold(request,date_list,per_p_count=3,dis_page_num=5):
     # 用户点击的当前页面页码
     current_page = request.GET.get('p',1)
     current_page = int(current_page)
@@ -92,6 +92,59 @@ def page(request,date_list,per_p_count=5,dis_page_num=5):
     # 声明该字符串为安全字符串，页面上显示为html代码
     link_str = mark_safe(link_str)
     return {"li":li,"page":link_str}
+
+def page(request,data):
+    current_click_page = request.GET.get('p',1)
+    current_click_page = int(current_click_page)
+    data_length = len(data)
+    per_page_display_data_num = 3
+    max_link_num = 5
+    link_count, tag = divmod(data_length, per_page_display_data_num)
+    if tag:
+        link_count += 1
+    if data_length >= per_page_display_data_num * max_link_num:
+        link_num = max_link_num
+        if current_click_page <= (link_num + 1)/2:
+            link_start = 1
+            link_end = link_num + 1
+        elif current_click_page > link_count - int((link_num + 1)/2):
+            link_start = link_count - link_num + 1
+            link_end = link_count + 1
+        else:
+            link_start = current_click_page - int((link_num - 1)/2)
+            link_end = current_click_page + int((link_num - 1)/2) + 1
+    else:
+        link_num,last = divmod(data_length,per_page_display_data_num)
+        if last:
+            link_num += 1
+            link_start = 1
+            link_end = link_start + link_num
+    display_start_data_pos = (current_click_page - 1) * per_page_display_data_num
+    display_end_data_pos = current_click_page * per_page_display_data_num
+    display_data = data[display_start_data_pos:display_end_data_pos]
+    link_list = []
+    if current_click_page != 1:
+        tmp = '<li><a href="/?p=%s" class="button big previous">上一页</a></li>' %(current_click_page - 1)
+    else:
+        tmp = '<li><a class="disabled button big previous">上一页</a></li>'
+    link_list.append(tmp)
+    for item in range(link_start,link_end):
+        if item == current_click_page:
+            tmp = '<li class="page active"><a href="/?p=%s">%s</a></li>' %(item,item)
+        else:
+            tmp = '<li class="page"><a href="/?p=%s">%s</a></li>'%(item,item)
+        link_list.append(tmp)
+    if link_end - 1 == current_click_page:
+        tmp = '<li><a class="disabled button big previous">下一页</a></li>'
+    else:
+        tmp = '<li><a href="/?p=%s" class="button big previous">下一页</a></li>' %(current_click_page + 1)
+    link_list.append(tmp)
+    # tmp = '<li><a href="/p=%s">最后一页</a></li>' % (link_count)
+    # link_list.append(tmp)
+    link_str = "".join(link_list)
+    link_str = mark_safe(link_str)
+    # print("current_click_page:%s data_length:%s link_num:%s link_count:%s link_start:%s link_end:%s " %(current_click_page,data_length,link_num,link_count,link_start,link_end))
+    return {"li":display_data,"page":link_str}
 
 class LoginFrom(forms.Form):
     username = forms.CharField(
