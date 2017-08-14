@@ -23,75 +23,75 @@ def calculate_hash(hashstr,salt):
     res = hash.hexdigest()
     return res
 
-def pageold(request,date_list,per_p_count=3,dis_page_num=5):
-    # 用户点击的当前页面页码
-    current_page = request.GET.get('p',1)
-    current_page = int(current_page)
-    # 所有数据的长度，决定我们需要多少分页
-    data_len = len(date_list)
-    # 每个页面上显示多少条数据
-    per_page_count = per_p_count
-    # 用于将数据切片的起始位置，根据当前页的页码生成切片的起始位置
-    start = (current_page - 1) * per_page_count
-    # 用于将数据切片的终止位置，根据当前页面页码生成切片的终止位置
-    end = current_page * per_page_count
-    # 根据总数据长度和每页显示的数据条目相除商和余数，余数不为0时，总页码加一
-    page_count,last = divmod(data_len,per_page_count)
-    if last:
-        page_count += 1
-    # 对数据切片
-    li = date_list[start:end]
-    # 声明变量用于存放生成的翻页按钮的字符串
-    link_list = []
-    # 页面上要显示的翻页按钮的数量，最好写成奇数，页面生成的页码才对称
-    if data_len/per_page_count >= dis_page_num:
-        display_page_num = dis_page_num
-    else:
-        display_page_num = math.ceil(data_len/per_page_count)
-    # 如果当前请求的页面小于等于页面显示页码数的中位数，那么页码起始位置为1，结束位置为显示页码数加一
-    if current_page <= math.ceil((display_page_num + 1)/2):
-        page_start = 1
-        page_end = display_page_num + 1
-    else:
-        # 如果当前页码位于总页码后几项，那么起始位置就是总页码减去显示页码数量，结束页码就是总页码加一
-        if current_page > page_count - int((display_page_num + 1)/2):
-            page_end = page_count + 1
-            page_start = page_count - display_page_num
-        else:
-            # 否则，终止页码就是当前页码加上显示页码加一后的一半
-            page_end = current_page + int((display_page_num + 1)/2)
-            # 否则，起始页码就是当前页码减去显示页码减一后的一半
-            page_start = current_page - int((display_page_num - 1)/2)
-    # 将起始页码和终止页码加入range()生成页码字符串
-    for item in range(page_start,page_end):
-        # 如果当前页码被选中，就为当前页码添加一个css样式active，用于标识当前的页码
-        if item == current_page:
-            tmp = '<li class="page active"><a href="/?p=%s">%s</a></li>' %(item,item)
-        else:
-            tmp='<li class="page"><a href="/?p=%s">%s</a></li>' %(item,item)
-        # 把所有的页码字符串加入页码字符串列表
-        link_list.append(tmp)
-    else:
-        if display_page_num == 1:
-            last = '<li><a href="" class="disabled button big previous">上一页</a></li>'
-            next_p = '<li><a href="" class="disabled button big next">下一页</a></li>'
-        else:
-            if current_page == 1:
-                last = '<li><a href="" class="disabled button big previous">上一页</a></li>'
-                next_p = '<li><a href="/?p=2" class="button big next">下一页</a></li>'
-            elif current_page == page_end-1:
-                last = '<li><a href="/?p=%s" class="button big previous">上一页</a></li>' %(current_page-1)
-                next_p = '<li><a href="" class="disabled button big next">下一页</a></li>'
-            else:
-                last = '<li><a href="/?p=%s" class="button big previous">上一页</a></li>' %(current_page-1)
-                next_p = '<li><a href="/?p=%s" class="button big next">下一页</a></li>' %(current_page+1)
-        link_list.insert(0,last)
-        link_list.append(next_p)
-    # 成成页码html字符串
-    link_str = "".join(link_list)
-    # 声明该字符串为安全字符串，页面上显示为html代码
-    link_str = mark_safe(link_str)
-    return {"li":li,"page":link_str}
+# def pageold(request,date_list,per_p_count=3,dis_page_num=5):
+#     # 用户点击的当前页面页码
+#     current_page = request.GET.get('p',1)
+#     current_page = int(current_page)
+#     # 所有数据的长度，决定我们需要多少分页
+#     data_len = len(date_list)
+#     # 每个页面上显示多少条数据
+#     per_page_count = per_p_count
+#     # 用于将数据切片的起始位置，根据当前页的页码生成切片的起始位置
+#     start = (current_page - 1) * per_page_count
+#     # 用于将数据切片的终止位置，根据当前页面页码生成切片的终止位置
+#     end = current_page * per_page_count
+#     # 根据总数据长度和每页显示的数据条目相除商和余数，余数不为0时，总页码加一
+#     page_count,last = divmod(data_len,per_page_count)
+#     if last:
+#         page_count += 1
+#     # 对数据切片
+#     li = date_list[start:end]
+#     # 声明变量用于存放生成的翻页按钮的字符串
+#     link_list = []
+#     # 页面上要显示的翻页按钮的数量，最好写成奇数，页面生成的页码才对称
+#     if data_len/per_page_count >= dis_page_num:
+#         display_page_num = dis_page_num
+#     else:
+#         display_page_num = math.ceil(data_len/per_page_count)
+#     # 如果当前请求的页面小于等于页面显示页码数的中位数，那么页码起始位置为1，结束位置为显示页码数加一
+#     if current_page <= math.ceil((display_page_num + 1)/2):
+#         page_start = 1
+#         page_end = display_page_num + 1
+#     else:
+#         # 如果当前页码位于总页码后几项，那么起始位置就是总页码减去显示页码数量，结束页码就是总页码加一
+#         if current_page > page_count - int((display_page_num + 1)/2):
+#             page_end = page_count + 1
+#             page_start = page_count - display_page_num
+#         else:
+#             # 否则，终止页码就是当前页码加上显示页码加一后的一半
+#             page_end = current_page + int((display_page_num + 1)/2)
+#             # 否则，起始页码就是当前页码减去显示页码减一后的一半
+#             page_start = current_page - int((display_page_num - 1)/2)
+#     # 将起始页码和终止页码加入range()生成页码字符串
+#     for item in range(page_start,page_end):
+#         # 如果当前页码被选中，就为当前页码添加一个css样式active，用于标识当前的页码
+#         if item == current_page:
+#             tmp = '<li class="page active"><a href="/?p=%s">%s</a></li>' %(item,item)
+#         else:
+#             tmp='<li class="page"><a href="/?p=%s">%s</a></li>' %(item,item)
+#         # 把所有的页码字符串加入页码字符串列表
+#         link_list.append(tmp)
+#     else:
+#         if display_page_num == 1:
+#             last = '<li><a href="" class="disabled button big previous">上一页</a></li>'
+#             next_p = '<li><a href="" class="disabled button big next">下一页</a></li>'
+#         else:
+#             if current_page == 1:
+#                 last = '<li><a href="" class="disabled button big previous">上一页</a></li>'
+#                 next_p = '<li><a href="/?p=2" class="button big next">下一页</a></li>'
+#             elif current_page == page_end-1:
+#                 last = '<li><a href="/?p=%s" class="button big previous">上一页</a></li>' %(current_page-1)
+#                 next_p = '<li><a href="" class="disabled button big next">下一页</a></li>'
+#             else:
+#                 last = '<li><a href="/?p=%s" class="button big previous">上一页</a></li>' %(current_page-1)
+#                 next_p = '<li><a href="/?p=%s" class="button big next">下一页</a></li>' %(current_page+1)
+#         link_list.insert(0,last)
+#         link_list.append(next_p)
+#     # 成成页码html字符串
+#     link_str = "".join(link_list)
+#     # 声明该字符串为安全字符串，页面上显示为html代码
+#     link_str = mark_safe(link_str)
+#     return {"li":li,"page":link_str}
 
 def page(request,data):
     current_click_page = request.GET.get('p',1)
