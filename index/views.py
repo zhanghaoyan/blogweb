@@ -97,8 +97,8 @@ def page(request,data):
     current_click_page = request.GET.get('p',1)
     current_click_page = int(current_click_page)
     data_length = len(data)
-    per_page_display_data_num = 3
-    max_link_num = 5
+    per_page_display_data_num = 5
+    max_link_num = 7
     link_count, tag = divmod(data_length, per_page_display_data_num)
     if tag:
         link_count += 1
