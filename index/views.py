@@ -100,6 +100,7 @@ def page(request,data):
     per_page_display_data_num = 5
     max_link_num = 7
     link_count, tag = divmod(data_length, per_page_display_data_num)
+    link_start = link_end = 0
     if tag:
         link_count += 1
     if data_length >= per_page_display_data_num * max_link_num:
