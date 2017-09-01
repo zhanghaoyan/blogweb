@@ -8,6 +8,7 @@ class Article(models.Model):
     category = models.ForeignKey('Cattegory',to_field="cid")
     time = models.CharField(max_length=20,null=False,)
     status = models.IntegerField(null=False,default=1)
+    like = models.IntegerField(default=0)
 
 class Cattegory(models.Model):
     cid = models.IntegerField(primary_key=True,auto_created=True)
