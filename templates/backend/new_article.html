@@ -52,7 +52,16 @@
             CKEDITOR.replace('content',{
                 "filebrowserUploadUrl" : "/backend/upload/",
                 extraPlugins: 'codesnippet',
-                codeSnippet_theme: 'dark'
+                codeSnippet_theme: 'dark',
+                codeSnippet_languages: {
+                    Golang:'Golang',
+                    Python: 'Python',
+                    HTML:'HTML',
+                    CSS:'CSS',
+                    javascript: 'JavaScript',
+                    php:'PHP',
+                    shell: 'shell'
+                }
             });
         });
         function cancel_submit() {
