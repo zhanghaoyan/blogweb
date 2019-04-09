@@ -18,7 +18,7 @@ class Edit(forms.Form):
     )
 
     category_id = forms.Field(
-        widget=widgets.RadioSelect(choices=((1,"LINUX"),(2,"PYTHON"),(3,"废点话"),(4,"瞎玩儿"))),
+        widget=widgets.RadioSelect(choices=((1,"LINUX"),(2,"PYTHON"),(3,"Golang"),(4,"瞎玩儿"))),
     )
 
 @auth
