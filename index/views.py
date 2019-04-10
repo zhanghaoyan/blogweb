@@ -217,7 +217,7 @@ def index(request):
             </a>
         </li>
         """
-    data = models.Article.objects.filter(status=1).order_by("time").all().values()
+    data = models.Article.objects.filter(status=1).order_by("aid").all().values()
     res = []
     for item in data:
         res.append(item)
