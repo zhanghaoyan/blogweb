@@ -11,7 +11,12 @@
     <!--[if lte IE 9]><link rel="stylesheet" href="/static/assets/css/ie9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="/static/assets/css/ie8.css" /><![endif]-->
     {% block css %}
-
+        <style>
+            .chargecode {
+                width: 200px;
+                height: 200px;
+            }
+        </style>
     {% endblock %}
 </head>
 <body>
@@ -130,8 +135,8 @@
             <h2>关于</h2>
             <p>当你的能力撑不起你的野心，那你就应该滚去奋斗！</p>
             <span>
-                <img src="/static/images/alipay.tiff">
-                <img src="/static/images/wechatpay.tiff">
+                <img class="chargecode" src="/static/images/alipay.tiff">
+                <img class="chargecode" src="/static/images/wechatpay.tiff">
             </span>
             <ul class="actions">
                 <li><a href="#" class="button">更多</a></li>
