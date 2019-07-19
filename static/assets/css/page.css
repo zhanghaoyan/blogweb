@@ -18,6 +18,7 @@ ul.actions li.page {
 
 .chargecode {
     text-align: center;
+    display: block;
 }
 
 .chargecode img {
